@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<jsp:include page="topbar.jsp"/>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,7 @@
     <p style="color:red">${alert}</p>
 </c:if>
 
-<form action="login" method="post">
+<form action="${pageContext.request.contextPath}/login" method="post">
     <p>
         <label>Tài khoản: </label>
         <input type="text" name="username" />

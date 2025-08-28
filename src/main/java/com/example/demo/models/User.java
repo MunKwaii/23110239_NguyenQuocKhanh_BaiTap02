@@ -17,7 +17,6 @@ public class User implements Serializable {
     private String phone;
     private Date createdDate;
 
-    // Constructors
     public User() {
     }
 
@@ -35,7 +34,6 @@ public class User implements Serializable {
         this.createdDate = createdDate;
     }
 
-    // Getters & Setters
     public int getId() {
         return id;
     }

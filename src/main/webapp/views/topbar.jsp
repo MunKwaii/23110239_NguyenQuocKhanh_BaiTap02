@@ -1,4 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
 <c:choose>
     <c:when test="${sessionScope.account == null}">
         <div class="col-sm-6">
@@ -11,12 +13,11 @@
             </ul>
         </div>
     </c:when>
-
     <c:otherwise>
         <div class="col-sm-6">
             <ul class="list-inline right-topbar pull-right">
                 <li>
-                    <a href="${pageContext.request.contextPath }/member/myaccount">
+                    <a href="${pageContext.request.contextPath }/home">
                             ${sessionScope.account.fullName}
                     </a>
                     | <a href="${pageContext.request.contextPath }/logout">Đăng Xuất</a>

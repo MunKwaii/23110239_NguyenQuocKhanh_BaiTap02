@@ -13,7 +13,8 @@ import java.io.IOException;
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/login")
 public class LoginController extends HttpServlet {
-
+    public static final String SESSION_USERNAME = "username";
+    public static final String COOKIE_REMEMBER = "username";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -35,7 +36,7 @@ public class LoginController extends HttpServlet {
                 }
             }
         }
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class LoginController extends HttpServlet {
     }
 
     private void saveRememberMe(HttpServletResponse response, String username) {
-        Cookie cookie = new Cookie("username", username);
+        Cookie cookie = new Cookie(COOKIE_REMEMBER, username);
         cookie.setMaxAge(30 * 60);
         response.addCookie(cookie);
     }
