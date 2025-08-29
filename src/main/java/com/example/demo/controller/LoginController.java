@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.models.User;
 import com.example.demo.service.UserService;
-import com.example.demo.service.UserServiceImpl;
+import com.example.demo.service.implement.UserServiceImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

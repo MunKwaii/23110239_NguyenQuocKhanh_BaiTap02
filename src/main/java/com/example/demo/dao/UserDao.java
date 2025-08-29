@@ -8,4 +8,7 @@ public interface UserDao {
     boolean checkExistEmail(String email);
     boolean checkExistUsername(String username);
     boolean checkExistPhone(String phone);
+    User findByEmail(String email);
+    void updatePassword(int userId, String newPassword);
+
 }

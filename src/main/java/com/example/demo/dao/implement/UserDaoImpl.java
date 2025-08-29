@@ -121,4 +121,49 @@ public class UserDaoImpl implements UserDao {
         }
         return duplicate;
     }
+
+    @Override
+    public User findByEmail(String email) {
+        String sql = "SELECT * FROM [User] WHERE email = ?";
+        try {
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setEmail(rs.getString("email"));
+                user.setUserName(rs.getString("username"));
+                user.setFullName(rs.getString("fullname"));
+                user.setPassword(rs.getString("password"));
+                user.setAvatar(rs.getString("avatar"));
+                user.setRoleid(rs.getInt("roleid"));
+                user.setPhone(rs.getString("phone"));
+                user.setCreatedDate(rs.getDate("createdDate"));
+                return user;
+            }
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void updatePassword(int userId, String newPassword) {
+        String sql = "UPDATE [User] SET password = ? WHERE id = ?";
+        try {
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, newPassword);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

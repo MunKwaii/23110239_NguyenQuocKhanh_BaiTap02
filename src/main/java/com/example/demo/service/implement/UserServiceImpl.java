@@ -1,8 +1,9 @@
-package com.example.demo.service;
+package com.example.demo.service.implement;
 
 import com.example.demo.dao.UserDao;
 import com.example.demo.dao.implement.UserDaoImpl;
 import com.example.demo.models.User;
+import com.example.demo.service.UserService;
 
 public class UserServiceImpl implements UserService {
     UserDao userDao = new UserDaoImpl();
