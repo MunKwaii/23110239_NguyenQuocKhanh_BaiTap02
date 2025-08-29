@@ -20,7 +20,8 @@ import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.commons.fileupload2.jakarta.servlet6.JakartaServletFileUpload;
 
-@WebServlet(urlPatterns = {"/home/category/add"})
+@WebServlet(urlPatterns = {"/admin/category/add"})
+
 public class CategoryAddController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final CategoryService cateService = new CategoryServiceImpl();
@@ -28,7 +29,6 @@ public class CategoryAddController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        // Forward tới đúng file trong thư mục /views/
         req.getRequestDispatcher("/views/add-category.jsp").forward(req, resp);
     }
 
@@ -38,7 +38,6 @@ public class CategoryAddController extends HttpServlet {
 
         Category category = new Category();
 
-        // Tạo factory & upload cho Jakarta Servlet
         DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
         JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
 
@@ -46,17 +45,14 @@ public class CategoryAddController extends HttpServlet {
             resp.setContentType("text/html;charset=UTF-8");
             req.setCharacterEncoding("UTF-8");
 
-            // Lấy field trong form
             List<FileItem> items = upload.parseRequest(req);
 
             for (FileItem item : items) {
                 if (item.isFormField()) {
-                    // Xử lý field text
                     if ("name".equals(item.getFieldName())) {
                         category.setCatename(item.getString(StandardCharsets.UTF_8));
                     }
                 } else {
-                    // Xử lý file upload
                     if ("icon".equals(item.getFieldName()) && item.getSize() > 0) {
                         String originalFileName = item.getName();
                         int index = originalFileName.lastIndexOf(".");
@@ -68,7 +64,6 @@ public class CategoryAddController extends HttpServlet {
                             file.getParentFile().mkdirs();
                         }
 
-                        // FileUpload2 cần Path
                         item.write(file.toPath());
 
                         category.setIcon("category/" + fileName);
@@ -76,11 +71,9 @@ public class CategoryAddController extends HttpServlet {
                 }
             }
 
-            // Lưu vào DB
             cateService.insert(category);
 
-            // Redirect về danh sách trong mapping /home/category/list
-            resp.sendRedirect(req.getContextPath() + "/home/category/list");
+            resp.sendRedirect(req.getContextPath() + "/admin/category/list");
 
         } catch (Exception e) {
             e.printStackTrace();

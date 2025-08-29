@@ -8,7 +8,7 @@
 <body>
 <h2>Chỉnh sửa danh mục</h2>
 
-<c:url value="/home/category/edit" var="editUrl"/>
+<c:url value="/admin/category/edit" var="editUrl"/>
 <form role="form" action="${editUrl}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="${category.cateid}"/>
 

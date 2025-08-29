@@ -20,7 +20,8 @@ import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.commons.fileupload2.jakarta.servlet6.JakartaServletFileUpload;
 
-@WebServlet(urlPatterns = {"/home/category/edit"})
+@WebServlet(urlPatterns = {"/admin/category/edit"})
+
 public class CategoryEditController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final CategoryService cateService = new CategoryServiceImpl();
@@ -31,7 +32,6 @@ public class CategoryEditController extends HttpServlet {
         String id = req.getParameter("id");
         Category category = cateService.get(Integer.parseInt(id));
         req.setAttribute("category", category);
-        // forward về đúng file JSP (hiện file edit-category.jsp nằm ở /views/)
         req.getRequestDispatcher("/views/edit-category.jsp").forward(req, resp);
     }
 
@@ -77,11 +77,9 @@ public class CategoryEditController extends HttpServlet {
                 }
             }
 
-            // Cập nhật DB
             cateService.edit(category);
 
-            // redirect về danh sách
-            resp.sendRedirect(req.getContextPath() + "/home/category/list");
+            resp.sendRedirect(req.getContextPath() + "/admin/category/list");
 
         } catch (Exception e) {
             e.printStackTrace();

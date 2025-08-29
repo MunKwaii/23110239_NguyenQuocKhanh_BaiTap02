@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/home/category/delete"})
+@WebServlet(urlPatterns = {"/admin/category/delete"})
 public class CategoryDeleteController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final CategoryService cateService = new CategoryServiceImpl();
@@ -25,7 +25,7 @@ public class CategoryDeleteController extends HttpServlet {
                 cateService.delete(Integer.parseInt(id));
             }
             // redirect về list sau khi xóa
-            resp.sendRedirect(req.getContextPath() + "/home/category/list");
+            resp.sendRedirect(req.getContextPath() + "/category/list");
         } catch (Exception e) {
             e.printStackTrace();
             resp.getWriter().write("Lỗi khi xóa category: " + e.getMessage());
