@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 
-@WebServlet(urlPatterns = "/image")  // Ví dụ: /image?fname=abc.png
+@WebServlet(urlPatterns = "/image")
 public class DownloadImageController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,6 @@ public class DownloadImageController extends HttpServlet {
         String fileName = req.getParameter("fname");
         File file = new File(Constant.DIR + "/" + fileName);
 
-        // Thiết lập kiểu dữ liệu trả về
         resp.setContentType("image/jpeg");
 
         if (file.exists()) {

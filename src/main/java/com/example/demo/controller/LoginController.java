@@ -24,7 +24,6 @@ public class LoginController extends HttpServlet {
             return;
         }
 
-        // Check cookie
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {

@@ -24,8 +24,7 @@ public class CategoryDeleteController extends HttpServlet {
             if (id != null) {
                 cateService.delete(Integer.parseInt(id));
             }
-            // redirect về list sau khi xóa
-            resp.sendRedirect(req.getContextPath() + "/category/list");
+            resp.sendRedirect(req.getContextPath() + "/admin/category/list");
         } catch (Exception e) {
             e.printStackTrace();
             resp.getWriter().write("Lỗi khi xóa category: " + e.getMessage());

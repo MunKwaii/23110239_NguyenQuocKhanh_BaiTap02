@@ -10,7 +10,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f0f2f5;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            margin: 0;
+            padding: 0;
         }
         .login-box {
             width: 400px;
