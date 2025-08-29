@@ -8,7 +8,8 @@
 <body>
 <h2>Thêm danh mục mới</h2>
 
-<form role="form" action="add" method="post" enctype="multipart/form-data">
+<form role="form" action="${pageContext.request.contextPath}/home/category/add"
+      method="post" enctype="multipart/form-data">
     <div>
         <label>Tên danh mục:</label>
         <input type="text" name="name" placeholder="Nhập tên danh mục" required/>

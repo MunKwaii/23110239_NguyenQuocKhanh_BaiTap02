@@ -31,7 +31,8 @@ public class CategoryEditController extends HttpServlet {
         String id = req.getParameter("id");
         Category category = cateService.get(Integer.parseInt(id));
         req.setAttribute("category", category);
-        req.getRequestDispatcher("/views/admin/edit-category.jsp").forward(req, resp);
+        // forward về đúng file JSP (hiện file edit-category.jsp nằm ở /views/)
+        req.getRequestDispatcher("/views/edit-category.jsp").forward(req, resp);
     }
 
     @Override
@@ -40,7 +41,6 @@ public class CategoryEditController extends HttpServlet {
 
         Category category = new Category();
 
-        // Commons FileUpload2 cho Jakarta Servlet
         DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
         JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
 
@@ -48,11 +48,9 @@ public class CategoryEditController extends HttpServlet {
             resp.setContentType("text/html;charset=UTF-8");
             req.setCharacterEncoding("UTF-8");
 
-            // Parse form data
             List<FileItem> items = upload.parseRequest(req);
             for (FileItem item : items) {
                 if (item.isFormField()) {
-                    // Xử lý field text
                     switch (item.getFieldName()) {
                         case "id":
                             category.setCateid(Integer.parseInt(item.getString(StandardCharsets.UTF_8)));
@@ -62,7 +60,6 @@ public class CategoryEditController extends HttpServlet {
                             break;
                     }
                 } else {
-                    // Xử lý file upload
                     if ("icon".equals(item.getFieldName()) && item.getSize() > 0) {
                         String originalFileName = item.getName();
                         int index = originalFileName.lastIndexOf(".");
@@ -74,9 +71,7 @@ public class CategoryEditController extends HttpServlet {
                             file.getParentFile().mkdirs();
                         }
 
-                        // FileUpload2 cần Path
                         item.write(file.toPath());
-
                         category.setIcon("category/" + fileName);
                     }
                 }
@@ -85,8 +80,8 @@ public class CategoryEditController extends HttpServlet {
             // Cập nhật DB
             cateService.edit(category);
 
-            // Quay lại trang list
-            resp.sendRedirect(req.getContextPath() + "/admin/category/list");
+            // redirect về danh sách
+            resp.sendRedirect(req.getContextPath() + "/home/category/list");
 
         } catch (Exception e) {
             e.printStackTrace();

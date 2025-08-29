@@ -25,8 +25,8 @@
             <td><img src="${imgUrl}" width="150" height="120" alt="image"/></td>
             <td>${cate.catename}</td>
             <td>
-                <a href="<c:url value='/admin/category/edit?id=${cate.cateid}'/>">Sửa</a> |
-                <a href="<c:url value='/admin/category/delete?id=${cate.cateid}'/>"
+                <a href="<c:url value='/home/category/edit?id=${cate.cateid}'/>">Sửa</a> |
+                <a href="<c:url value='/home/category/delete?id=${cate.cateid}'/>"
                    onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
             </td>
         </tr>
@@ -35,7 +35,7 @@
 </table>
 
 <br/>
-<a href="<c:url value='/admin/category/add'/>">+ Thêm danh mục</a>
+<a href="<c:url value='/home/category/add'/>">+ Thêm danh mục</a>
 
 </body>
 </html>
